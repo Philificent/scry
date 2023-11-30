@@ -1,6 +1,9 @@
 # Scry
 
-Tool for devs running on BigCommerce to debug their widget/content regions
+Version : 23.11.15pa (pre-alpha)
+Current Status: NOT WORKING
+
+Tool for devs running on BigCommerce to debug their content/global regions for widgets
 
 This is a simple script that you can drop into your site "scripts" section of your BC Admin console that will help you and other content managers
 debug your widget/content regions.

@@ -1,0 +1,27 @@
+/*
+    Color palette:
+    #494947 - Davy's Gray
+    #35FF69 - Spring Green
+    #44CCFF - Vivid Sky Blue
+    #7494EA - Cornflower Blue
+    #D138BF - Steel Pink
+    #E6E6E6 - Platinum
+  */
+html {background: #000;}
+body {min-height: 100vh;}
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2.8rem 4rem 1fr 3rem;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "banner"
+    "header"
+    "main"
+    "footer";
+}
+.banner {grid-area: banner;background: #494947;color: #fff;}
+.header {grid-area: header;background: #000;color: #fff;}
+.main {grid-area: main;background-color: #E6E6E6;}
+.footer {grid-area: footer;background: #000;color: #fff;}

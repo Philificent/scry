@@ -1,0 +1,15 @@
+---
+interface Props {
+	desc: string;
+  img: string;
+}
+
+const { desc, img } = Astro.props;
+---
+
+<section class="flex flex-col sm:flex-row bg-white">
+  <p class="text-2xl text-center sm:text-right self-center flex-1 p-4 max-w-prose sm:w-1/2">{desc ?? ''}</p>
+  <p class="w-full flex flex-1 justify-center sm:justify-start sm:w-1/2">
+    {<img src={img} alt="decorative image" width="320" height="320" loading="lazy" /> ?? ''}
+  </p>
+</section>

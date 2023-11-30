@@ -1,0 +1,35 @@
+---
+
+---
+<section class="hero relative w-full h-80 overflow-hidden" data-content-region="home-hero">
+  <div class="hero-cover"></div>
+  <!-- <img class="absolute top-0 left-0" src="https://source.unsplash.com/random/1080x320/?city,night" alt="image used as background from unsplash" /> -->
+  <button class="text-3xl absolute bottom-5 left-4 text-white backdrop-blur-md rounded border border-white p-4" onclick="scry()">
+    Type "scry" to start the project
+  </button>
+</section>
+<style>
+  .hero {
+    background: #000 url("https://source.unsplash.com/random/1080x320/?city,night") 0% 50% no-repeat;
+    background-size: cover;
+  }
+  .hero button {background-color: rgba(0,0,0,0.3);text-shadow: 0 1px #000}
+  .hero-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 5;
+    transition: all 1s ease;
+  }
+</style>
+<script is:inline>
+  // document loaded we adjust the styles of the hero to remove the ::before cover
+  window.addEventListener("load", () => {
+    const heroCover = document.querySelector(".hero-cover");
+    heroCover.style.opacity = 0;
+    heroCover.style.zIndex = -1;
+  })
+</script>
