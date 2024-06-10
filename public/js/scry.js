@@ -1,14 +1,29 @@
 /*
-  Scry v23.11.27pa
+  Scry v24.06.10a
   TODO:
     - look for regions and highlight them
-    - if a region is empty, style it as empty and add to the list of un-used but available regions
-    - Add widget IDs to the region overlay
+    - if a region is empty, style it as empty where it would be on the page and add to the list of un-used but available regions
+    - Add widget IDs to the region overlay (do we have those? or need to mod the site code?)
     - if the region data-attribute contains a value with '--global' then mark as a global region in the overlay
     - add close button
-    - add scry disable button
-    - add tilt/layer button
+    - add scry disable/enable toggle
     - add keyup event listener
+    - add mini-map (use total page height and percentages to show where each region is in the page)
+    - add browser performance detection/monitor - can we get live render FPS info?
+    - DOM size (nodes) - 800 warning!, 1400 excessive!
+    - - Get # of elements: `document.querySelectorAll('*').length;`
+    - - Get # of nodes for an element: `document.body.childNodes.length;`
+    - - Get # of total DOM nodes:
+    ```
+    let elements = document.querySelectorAll('*');
+    let nodes = 0;
+    for (let i = 0; i < elements.length; i++) {
+      nodes += elements[i].childNodes.length;
+    }
+    console.log(elements);
+    console.log(nodes);
+    ```
+
 
 */
 
@@ -106,7 +121,6 @@ function scry() {
   }`;
   document.head.appendChild(style);
 
-
   sessionStorage.setItem('scry', 'open');
   let regionCount = 0;
   let $contentRegion = document.querySelectorAll("[data-content-region]");
@@ -120,10 +134,48 @@ function scry() {
   })
   console.log("total regions found: " + regionCount);
   // list amount of regions that are global
-  console.log("total global regions found: " + document.querySelectorAll("[data-content-region='--global']").length);
+  console.log("total global regions found: " + document.querySelectorAll("[data-content-region*='--global']").length);
   // list empty regions
   // console.log("total empty regions found: " + document.querySelectorAll("[data-content-region='--empty']").length);
 
+  // Element and Node information
+  function getDef(element, def) {
+    let str = ""
+    let childs = element.childNodes
+    for (var i = 0; i < childs.length; ++i) {
+      if (childs[i].nodeType != 3) {
+        str += childs[i].nodeName + " " + def + "\n"
+        str += getDef(childs[i], def + 1)
+      }
+    }
+    return str
+  }
+  console.log(getDef(document.body, 0));
+
+  // let elements = document.querySelectorAll('*');
+  // let elements = document.body.querySelectorAll('*');
+  // let nodes = 0;
+  // for (let i = 0; i < elements.length; i++) {
+  //   // need another loop here to see if child nodes have nodes
+  //   nodes += elements[i].childNodes.length;
+  //   // can we kick out the name or type of element?
+  //   console.log("node name:",elements[i].nodeName,"Has child nodes?",elements[i].hasChildNodes());
+  //   if(elements[i].hasChildNodes()) {
+  //     console.log("child nodes:",elements[i].childNodes.length);
+  //     // loop through the child nodes and see if they have child nodes
+  //     for(let j = 0; j < elements[i].childNodes.length; j++) {
+  //       console.log("grandchild node name:",elements[i].childNodes[j].nodeName,"Has great-grandchild nodes?",elements[i].childNodes[j].hasChildNodes());
+  //       if(elements[i].childNodes[j].hasChildNodes()) {
+  //         console.log("great grandchild nodes:",elements[i].childNodes[j].childNodes.length);
+  //         for(let k = 0; k < elements[i].childNodes[j].childNodes.length; k++) {
+  //           console.log("great grandchild node name:",elements[i].childNodes[j].childNodes[k].nodeName);
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  // console.log("element count:",elements.length);
+  // console.log("node count:",nodes);
 }
 
 
