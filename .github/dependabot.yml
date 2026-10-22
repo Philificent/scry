@@ -1,0 +1,11 @@
+# Dependabot version updates with a release cooldown.
+# Security updates are not delayed by cooldown.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+      semver-patch-days: 3
